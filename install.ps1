@@ -9,7 +9,7 @@ Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.
 
 scoop install sudo coreutils cacert 7zip curl wget
 scoop install pandoc
-scoop install gh
+scoop install gh act
 
 # Virtualization functionality (WSL, Hyper-V)
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
