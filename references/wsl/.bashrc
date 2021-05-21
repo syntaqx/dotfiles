@@ -1,10 +1,5 @@
 #!/usr/env/bin bash
 
-# Vagrant
-# -------
-
-# https://www.w3cschool.cn/doc_vagrant/vagrant-other-wsl.html
-
 # Configure Vagrant for WSL
 export PATH="$PATH:/mnt/c/Program Files/Oracle/VirtualBox"
 
@@ -22,5 +17,4 @@ export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
 #
 # Once Docker is initialized and running on Windows, export the following
 # environment variable to give Vagrant access.
-export DOCKER_HOST=tcp://127.0.0.1:2375
-export DOCKER_HOST=unix:///var/run/docker.sock
+export DOCKER_HOST=unix:///var/run/docker.sock # tcp://127.0.0.1:2375

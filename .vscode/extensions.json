@@ -1,0 +1,18 @@
+{
+  "recommendations": [
+    "mutantdino.resourcemonitor",
+    "editorconfig.editorconfig",
+    "msjsdiag.debugger-for-chrome",
+    "ms-azuretools.vscode-docker",
+
+    "esbenp.prettier-vscode",
+
+    // Golang
+    "golang.go",
+
+    // PHP
+    "kokororin.vscode-phpfmt",
+    "felixfbecker.php-intellisense",
+    "felixfbecker.php-debug"
+  ]
+}
