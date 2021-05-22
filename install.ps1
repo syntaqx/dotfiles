@@ -107,14 +107,10 @@ scoop install php php-xdebug composer
 Write-Host ""
 Write-Host "Setting up local resources..." -ForegroundColor Green
 
-mkdir -p "$env:USERPROFILE/.ssh"
-mkdir -p "$env:USERPROFILE/.config"
-mkdir -p "$env:USERPROFILE/.local"
-
-mkdir -p "$env:USERPROFILE/bin"
-mkdir -p "$env:USERPROFILE/Projects"
-mkdir -p "$env:USERPROFILE/Workspaces"
-
+userdirs=@(".ssh", ".config", ".local", "bin", "Projects", "Workspaces")
+foreach ($userdir in $userdirs) {
+  mkdir -Force -p "$HOME/$userdir" -ErrorAction SilentlyContinue
+}
 
 # -----------------------------------------------------------------------------
 # Configures Git to use OpenSSH, wincred, and compatibilities with WSL2

@@ -1,6 +1,11 @@
 # Configure ignored files for all repositories on the device.
 # https://docs.github.com/en/github/getting-started-with-github/getting-started-with-git/ignoring-files#configuring-ignored-files-for-all-repositories-on-your-computer
 
+# %USER/tokenrc
+.npmrc
+.terraformrc
+
+# Bash output
 *.bash_hitory
 
 # Folder view configuration files
