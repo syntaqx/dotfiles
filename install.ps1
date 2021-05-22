@@ -55,7 +55,7 @@ Write-Host 'Allowing HTTP(s)...'
 Write-Host 'Allowing commong in-development ports...'
 
 [void](Set-NetFirewallProfile -DefaultInboundAction Block -DefaultOutboundAction Allow -NotifyOnListen True -AllowUnicastResponseToMulticast True)
-Write-Host 'Restarting and enabling Windows Firewall with default settings...'
+Write-Host 'Enabled and configured Windows Firewall...'
 
 # -----------------------------------------------------------------------------
 Write-Host ""
@@ -100,7 +100,9 @@ scoop install sudo coreutils cacert 7zip curl wget
 scoop install pandoc gh act terraform
 
 scoop install extras/vcredist2019
-scoop install php php-xdebug composer
+scoop install php composer
+
+# php-xdebug already included
 
 # -----------------------------------------------------------------------------
 # Ensure configuration and source directories exist for later
