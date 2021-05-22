@@ -45,24 +45,17 @@ Write-Host ""
 Write-Host "Configuring Firewall for Development..." -ForegroundColor Green
 Write-Host "------------------------------------" -ForegroundColor Green
 
-New-NetFirewallRule -DisplayName 'SSH' -Profile @('Private','Domain') -Direction Inbound -Action Allow -Protocol TCP -LocalPort @(22)
-New-NetFirewallRule -DisplayName 'HTTP(s)' -Profile @('Private','Domain') -Direction Inbound -Action Allow -Protocol TCP -LocalPort @(80,81,443)
-New-NetFirewallRule -DisplayName 'Local Development' -Direction Inbound -Action Allow -Protocol TCP -LocalPort @(1337,3000,3001,8080,8081,"9000-9100","9200-9400","9900-9999")
+[void](New-NetFirewallRule -DisplayName '.dotfiles ~/ SSH' -Profile @('Private','Domain') -Direction Inbound -Action Allow -Protocol TCP -LocalPort 22)
+Write-Host 'Allowing SSH...'
 
-# (re)Enable the Windows Firewall with Multicast
-Set-NetFirewallProfile -DefaultInboundAction Block -DefaultOutboundAction Allow -NotifyOnListen True -AllowUnicastResponseToMulticast True
+[void](New-NetFirewallRule -DisplayName '.dotfiles ~/ HTTP(s)' -Profile @('Private','Domain') -Direction Inbound -Action Allow -Protocol TCP -LocalPort @(80,81,443))
+Write-Host 'Allowing HTTP(s)...'
 
-# ------------------------------------------------------------------------------
-# Install scoop and some apps
-Write-Host ""
-Write-Host "Installing scoop package manager..." -ForegroundColor Green
-Write-Host "------------------------------------" -ForegroundColor Green
+[void](New-NetFirewallRule -DisplayName '.dotfiles ~/ Local Development' -Direction Inbound -Action Allow -Protocol TCP -LocalPort @(1337,3000,3001,8080,8081,"9000-9100","9200-9400","9900-9999"))
+Write-Host 'Allowing commong in-development ports...'
 
-if (Check-Command -cmdname 'scoop') {
-  Write-Host "scoop is already installed, skipping."
-} else {
-  Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
-}
+[void](Set-NetFirewallProfile -DefaultInboundAction Block -DefaultOutboundAction Allow -NotifyOnListen True -AllowUnicastResponseToMulticast True)
+Write-Host 'Restarting and enabling Windows Firewall with default settings...'
 
 # -----------------------------------------------------------------------------
 Write-Host ""
@@ -75,8 +68,24 @@ $wingetApplications = @(
   "Amazon.AWSCLI"
 )
 
-foreach ($query in $wingetApplications) {
-  winget install -e --id $query
+if (Check-Command -cmdname 'winget') {
+  foreach ($query in $wingetApplications) {
+    winget install -e --id $query
+  }
+} else {
+  Write-Host "winget not installed, skipping..." -ForegroundColor Red
+}
+
+# ------------------------------------------------------------------------------
+# Install scoop and some apps
+Write-Host ""
+Write-Host "Installing scoop package manager..." -ForegroundColor Green
+Write-Host "------------------------------------" -ForegroundColor Green
+
+if (Check-Command -cmdname 'scoop') {
+  Write-Host "scoop is already installed, skipping." -ForegroundColor Gray
+} else {
+  Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
 }
 
 # -----------------------------------------------------------------------------
