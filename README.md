@@ -1,6 +1,6 @@
-# .dotfiles
+# .dotfiles ~/
 
-Personal environment dotfiles, tooling and provisioning profiles.
+Personal dotfiles, period.
 
 > 🚧 __Extremely WIP!__ The repository is mostly functioning as functional
 > notes, so it may not work as expected. Proceed at your own risk.
@@ -11,9 +11,6 @@ Personal environment dotfiles, tooling and provisioning profiles.
 - Windows Insider Preview (flight ring)
 - Windows App Installer (Preview)
 - [winget](https://docs.microsoft.com/en-us/windows/package-manager/winget/)
-
-> The tooling is currently in public preview and is likely to eventually be
-> included either by default or as an optional feature.
 
 ## Unmanaged applications
 

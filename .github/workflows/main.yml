@@ -10,7 +10,6 @@ jobs:
 
   test:
     runs-on: windows-latest
-    shell: powershell
     steps:
     -
       name: Checkout
