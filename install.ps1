@@ -107,11 +107,10 @@ scoop install php composer
 # -----------------------------------------------------------------------------
 # Ensure configuration and source directories exist for later
 Write-Host ""
-Write-Host "Setting up local resources..." -ForegroundColor Green
+Write-Host "Setting up development user directories..." -ForegroundColor Green
 
-userdirs=@(".ssh", ".config", ".local", "bin", "Projects", "Workspaces")
-foreach ($userdir in $userdirs) {
-  mkdir -Force -p "$HOME/$userdir" -ErrorAction SilentlyContinue
+(".ssh",".config",".local","bin","Projects","Workspaces") |foreach {
+  mkdir -p $env:USERPROFILE/$_ -Force | Out-Null;
 }
 
 # -----------------------------------------------------------------------------
