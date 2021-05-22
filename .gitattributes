@@ -14,3 +14,7 @@
 *.{cmd,[cC][mM][dD]} text eol=crlf
 *.{bat,[bB][aA][tT]} text eol=crlf
 *.{sln,[sS][lL][nN]} text eol=crlf
+
+# Explicitly define line where it may collide with linters locally
+*.go text eol=lf
+*.sh text eol=lf
