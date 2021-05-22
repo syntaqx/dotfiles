@@ -2,9 +2,8 @@
 # PowerShell, be sure to run: Set-ExecutionPolicy RemoteSigned -scope CurrentUser
 # Bypass is also a good setting.
 
-# Determine the source directory of the download
-Write-Host "You are here: $PSScriptRoot"
-exit
+# Script parent directory source.
+# $PSScriptRoot
 
 # Self elevate administrative permissions in this script
 if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
