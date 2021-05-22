@@ -134,7 +134,6 @@ Enable-WindowsOptionalFeature -Online -NoRestart -FeatureName VirtualMachinePlat
 
 # ------------------------------------------------------------------------------
 # Restart Windows
-Write-Host "------------------------------------" -ForegroundColor Green
-
-Read-Host -Prompt "Setup complete, restart is needed. Press [ENTER] to restart computer."
-Restart-Computer
+# Write-Host "------------------------------------" -ForegroundColor Green
+# Read-Host -Prompt "Setup complete, restart is needed. Press [ENTER] to restart computer."
+# Restart-Computer

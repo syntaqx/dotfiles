@@ -8,15 +8,14 @@ on:
 
 jobs:
 
-  test:
+  install:
     runs-on: windows-latest
     steps:
     -
       name: Checkout
       uses: actions/checkout@v2
     -
-      name: Set ExecutionPolicy to Bypass
       run: Set-ExecutionPolicy Bypass -scope CurrentUser
     -
-      name: Run the installer
+      name: Run the Installer
       run: .\install.ps1
