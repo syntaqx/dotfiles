@@ -1,10 +1,16 @@
 # Windows 10 Provisioning Script
-# This should be run in PowerShell
+# PowerShell, be sure to run: Set-ExecutionPolicy RemoteSigned -scope CurrentUser
+# Bypass is also a good setting.
 
-Set-ExecutionPolicy RemoteSigned -scope CurrentUser
+# Determine the source directory of the download
+Write-Host "You are here: $PSScriptRoot"
+exit
 
 # Self elevate administrative permissions in this script
-if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs; exit }
+if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
+  Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs;
+  exit
+}
 
 function Check-Command($cmdname) {
   return [bool](Get-Command -Name $cmdname -ErrorAction SilentlyContinue)
@@ -18,21 +24,21 @@ Write-Host "------------------------------------" -ForegroundColor Green
 
 $openSSH = Get-WindowsCapability -Online | ? Name -like 'OpenSSH.Client*' | Select-Object Name, State
 if ($openSSH.State -ne "Installed") {
-    Write-Host "Enabling OpenSSH feature..." -ForegroundColor Green
-    Add-WindowsCapability -Name $openSsh.Name -Online
+  Write-Host "Enabling OpenSSH from Windows..." -ForegroundColor Green
+  Add-WindowsCapability -Name $openSsh.Name -Online
 }
 
 Set-Service ssh-agent -StartupType Automatic
 
 $sshAgentStopped = 'Stopped' -eq (Get-Service -Name 'ssh-agent' -ErrorAction SilentlyContinue).status
 Write-Verbose -Message ('SSH Agent Status is stopped: {0}' -f $sshAgentStopped)
-
 if ($sshAgentStopped) {
-    Write-Verbose -Message 'Stating SSH Agent'
-    Start-Service -Name 'ssh-agent'
+  Write-Verbose -Message 'Starting SSH Agent for this session...'
+  Start-Service -Name 'ssh-agent'
 }
 
-Get-Service ssh-agent
+# NOTE: Was really loud, but it's pretty helpful.
+# Get-Service ssh-agent
 
 # -----------------------------------------------------------------------------
 # Configure Windows Firewall for common local development ports
@@ -49,13 +55,13 @@ Set-NetFirewallProfile -DefaultInboundAction Block -DefaultOutboundAction Allow 
 
 # ------------------------------------------------------------------------------
 # Install scoop and some apps
+Write-Host ""
+Write-Host "Installing scoop package manager..." -ForegroundColor Green
+Write-Host "------------------------------------" -ForegroundColor Green
+
 if (Check-Command -cmdname 'scoop') {
   Write-Host "scoop is already installed, skipping."
-}
-else {
-  Write-Host ""
-  Write-Host "Installing scoop..." -ForegroundColor Green
-  Write-Host "------------------------------------" -ForegroundColor Green
+} else {
   Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
 }
 
@@ -66,7 +72,8 @@ Write-Host "------------------------------------" -ForegroundColor Green
 
 $wingetApplications = @(
   "Microsoft.PowerToys",
-  "Microsoft.WindowsTerminal"
+  "Microsoft.WindowsTerminal",
+  "Amazon.AWSCLI"
 )
 
 foreach ($query in $wingetApplications) {
@@ -81,11 +88,25 @@ Write-Host "------------------------------------" -ForegroundColor Green
 
 scoop bucket add extras
 
-scoop install extras/vcredist2019
 scoop install sudo coreutils cacert 7zip curl wget
-scoop install pandoc gh act
+scoop install pandoc gh act terraform
 
+scoop install extras/vcredist2019
 scoop install php php-xdebug composer
+
+# -----------------------------------------------------------------------------
+# Ensure configuration and source directories exist for later
+Write-Host ""
+Write-Host "Setting up local resources..." -ForegroundColor Green
+
+mkdir -p "$env:USERPROFILE/.ssh"
+mkdir -p "$env:USERPROFILE/.config"
+mkdir -p "$env:USERPROFILE/.local"
+
+mkdir -p "$env:USERPROFILE/bin"
+mkdir -p "$env:USERPROFILE/Projects"
+mkdir -p "$env:USERPROFILE/Workspaces"
+
 
 # -----------------------------------------------------------------------------
 # Configures Git to use OpenSSH, wincred, and compatibilities with WSL2
@@ -101,6 +122,7 @@ git config --global credential.helper wincred
 Write-Host ""
 Write-Host "Installing WSL..." -ForegroundColor Green
 Write-Host "------------------------------------" -ForegroundColor Green
+
 Enable-WindowsOptionalFeature -Online -NoRestart -FeatureName Microsoft-Windows-Subsystem-Linux
 Enable-WindowsOptionalFeature -Online -NoRestart -FeatureName VirtualMachinePlatform
 # Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -NoRestart
@@ -108,5 +130,6 @@ Enable-WindowsOptionalFeature -Online -NoRestart -FeatureName VirtualMachinePlat
 # ------------------------------------------------------------------------------
 # Restart Windows
 Write-Host "------------------------------------" -ForegroundColor Green
+
 Read-Host -Prompt "Setup complete, restart is needed. Press [ENTER] to restart computer."
 Restart-Computer

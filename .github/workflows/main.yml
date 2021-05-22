@@ -1,0 +1,23 @@
+name: dotfiles
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+
+  test:
+    runs-on: windows-latest
+    shell: powershell
+    steps:
+    -
+      name: Checkout
+      uses: actions/checkout@v2
+    -
+      name: Set ExecutionPolicy to Bypass
+      run: Set-ExecutionPolicy Bypass -scope CurrentUser
+    -
+      name: Run the installer
+      run: .\install.ps1

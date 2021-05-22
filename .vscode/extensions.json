@@ -2,17 +2,14 @@
   "recommendations": [
     "mutantdino.resourcemonitor",
     "editorconfig.editorconfig",
+    "eamodio.gitlens",
     "msjsdiag.debugger-for-chrome",
     "ms-azuretools.vscode-docker",
-
     "esbenp.prettier-vscode",
-
-    // Golang
     "golang.go",
-
-    // PHP
-    "kokororin.vscode-phpfmt",
     "felixfbecker.php-intellisense",
-    "felixfbecker.php-debug"
+    "felixfbecker.php-debug",
+    "kokororin.vscode-phpfmt",
+    "ms-vscode-remote.vscode-remote-extensionpack"
   ]
 }

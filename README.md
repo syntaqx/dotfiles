@@ -21,6 +21,7 @@ Personal environment dotfiles, tooling and provisioning profiles.
 
 - nVidia GeForce Experience
 - Logitech Capture
+- SteelSeries GG
 
 ### Productivity
 
@@ -31,10 +32,20 @@ Personal environment dotfiles, tooling and provisioning profiles.
 - Docker Desktop
 - Git Credential Manager Core
 - Git
+- GitHub CLI
+- GnuPg4Win
+- Keybase
+- Mozilla Firefox
+- PostgreSQL 13
+  - PostGIS Bundle
+  - pgAgent
+  - PgBouncer
+- [ScreenToGif](https://www.screentogif.com)
 - Slack
 - Spotify
-- Keybase
+- PremiumSoft Navicat Premium 15.0
 - Visual Studio Code
+- Zoom
 
 ### Gaming Platforms & Products
 
@@ -45,6 +56,13 @@ Personal environment dotfiles, tooling and provisioning profiles.
 - Steam
   - Apex Legends
   - Golf with your friends
+
+### Development Tools
+
+- [Go](https://golang.org/)
+- Node.js
+- Oracle VM VirtualBox 6.1.22 - *for Vagrant*
+- Vagrant
 
 #### World of Warcraft addon managers
 
