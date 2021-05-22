@@ -12,59 +12,75 @@ Personal dotfiles, period.
 - Windows App Installer (Preview)
 - [winget](https://docs.microsoft.com/en-us/windows/package-manager/winget/)
 
-## Unmanaged applications
+## Installation
 
-### Drivers
+```powershell
+Set-ExecutionPolicy RemoteSigned -scope CurrentUser
+.\install.ps1
+```
 
-- nVidia GeForce Experience
-- Logitech Capture
-- SteelSeries GG
+> This command will be changing over to a remote installer, but wanted to get
+> it fully working first.
 
-### Productivity
+## TODO
 
-- 1Password
-- Adobe Creative Cloud
-- Chrome Remote Desktop
-- Discord
-- Docker Desktop
-- Git Credential Manager Core
-- Git
-- GitHub CLI
-- GnuPg4Win
-- Keybase
-- Mozilla Firefox
-- PostgreSQL 13
-  - PostGIS Bundle
-  - pgAgent
-  - PgBouncer
-- [ScreenToGif](https://www.screentogif.com)
-- Slack
-- Spotify
-- PremiumSoft Navicat Premium 15.0
-- Visual Studio Code
-- Zoom
+### Applications
 
-### Gaming Platforms & Products
+A living document of things I either am unable to automatically install, or the
+more likely chance that I simply haven't tried to yet.
 
-- Battle.net
-  - World of Warcraft: Classic
-- Riot Client
-  - Valorant
-- Steam
-  - Apex Legends
-  - Golf with your friends
+#### Drivers
 
-### Development Tools
+- [ ] nVidia GeForce Experience
+- [ ] Logitech Capture
+- [ ] SteelSeries GG
 
-- [Go](https://golang.org/)
-- Node.js
-- Oracle VM VirtualBox 6.1.22 - *for Vagrant*
-- Vagrant
+#### Productivity
 
-#### World of Warcraft addon managers
+- [ ] 1Password
+- [ ] Adobe Creative Cloud
+- [ ] Chrome Remote Desktop
+- [ ] Discord
+- [ ] Docker Desktop
+- [ ] Git Credential Manager Core
+- [ ] Git
+- [ ] GitHub CLI
+- [ ] Google Chrome
+- [ ] GnuPg4Win
+- [ ] Keybase
+- [ ] Mozilla Firefox
+- [ ] PostgreSQL 13
+  - [ ] PostGIS Bundle
+  - [ ] pgAgent
+  - [ ] PgBouncer
+- [ ] [ScreenToGif](https://www.screentogif.com)
+- [ ] Slack
+- [ ] Spotify
+- [ ] PremiumSoft Navicat Premium 15.0
+- [ ] Visual Studio Code
+- [ ] Zoom
 
-- CurseForge
-- Overwolf
+#### Gaming Platforms & Products
+
+- [ ] Battle.net
+  - [ ] World of Warcraft: Classic
+- [ ] Riot Client
+  - [ ] Valorant
+- [ ] Steam
+  - [ ] Apex Legends
+  - [ ] olf with your friends
+
+#### Development Tools
+
+- [ ] [Go](https://golang.org/)
+- [ ] Node.js
+- [ ] Oracle VM VirtualBox 6.1.22 - *for Vagrant*
+- [ ] Vagrant
+
+##### World of Warcraft addon managers
+
+- [ ] CurseForge
+- [ ] Overwolf
 
 ## License
 

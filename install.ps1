@@ -1,3 +1,13 @@
+<#
+.SYNOPSIS
+    syntaqx/dotfiles installer
+.DESCRIPTION
+    Personal development environment and Win10 provisioning.
+.LINK
+    https://github.com/syntaqx/dotfiles
+#>
+param()
+
 # Windows 10 Provisioning Script
 # PowerShell, be sure to run: Set-ExecutionPolicy RemoteSigned -scope CurrentUser
 # Bypass is also a good setting.
