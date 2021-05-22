@@ -1,29 +1,70 @@
 <#
 .SYNOPSIS
-    syntaqx/dotfiles installer
+  syntaqx/dotfiles installer
 .DESCRIPTION
-    Personal development environment and Win10 provisioning.
+  Personal development environment and Win10 provisioning.
 .LINK
-    https://github.com/syntaqx/dotfiles
+  https://github.com/syntaqx/dotfiles
 #>
 param()
 
-# Windows 10 Provisioning Script
-# PowerShell, be sure to run: Set-ExecutionPolicy RemoteSigned -scope CurrentUser
-# Bypass is also a good setting.
+# Disable StrictMode in this script
+Set-StrictMode -Off
 
-# Script parent directory source.
-# $PSScriptRoot
+# Prepare variables
+$IS_EXECUTED_FROM_IEX = ($null -eq $MyInvocation.MyCommand.Path)
+
+# Don't abort if invoked with iex that would close the PS session
+function Exit-Installer {
+  param(
+    [Int] $errorCode = 1
+  )
+  if (-Not $IS_EXECUTED_FROM_IEX) {
+    exit $errorCode
+  }
+  break
+}
 
 # Self elevate administrative permissions in this script
 if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
-  Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs;
+  Start-Process PowerShell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs;
   exit
+}
+
+function Assert-Depdendencies() {
+  # PowerShell 5 at least
+  if (($PSVersionTable.PSVersion.Major) -lt 5) {
+    Write-Host "dotfiles installation failed!" -ForegroundColor DarkRed
+    Write-Host "PowerShell 5 or newer is required to run this installer."
+    Write-Host "https://microsoft.com/powershell"
+    Exit-Installer
+  }
+
+  # Ensure TLS 1.2 SecurityProtocol, which exists in .NET Framework 4.5+
+  if ([System.Enum]::GetNames([System.Net.SecurityProtocolType]) -notcontains 'Tls12') {
+    Write-Host "dotfiles installation failed!" -ForegroundColor DarkRed
+    Write-Host "TLS 1.2 or newer is required to run this installer."
+    Write-Host "This is provided with the .NET Framework 4.5 or newer."
+    Write-Host "https://microsoft.com/net/download"
+    Exit-Installer
+  }
+
+  # Show notification to change execution policy
+  $allowedExecutionPolicy = @('Unrestricted', 'RemoteSigned', 'ByPass')
+  if ((Get-ExecutionPolicy).ToString() -notin $allowedExecutionPolicy) {
+    Write-Host "dotfiles installation failed!" -ForegroundColor DarkRed
+    Write-Host "PowerShell requires an execution in [$($allowedExecutionPolicy -join ", ")]"
+    Write-Host "Run `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser` and try again."
+    Exit-Installer
+  }
 }
 
 function Check-Command($cmdname) {
   return [bool](Get-Command -Name $cmdname -ErrorAction SilentlyContinue)
 }
+
+# Assert dependencieds are available.
+Assert-Depdendencies
 
 # -----------------------------------------------------------------------------
 # Configure Windows Firewall for common local development ports

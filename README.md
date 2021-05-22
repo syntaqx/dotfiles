@@ -8,19 +8,24 @@ Personal dotfiles, period.
 ## Prerequisites
 
 - Windows 10 v1709 (10.0.16299) or later
-- Windows Insider Preview (flight ring)
-- Windows App Installer (Preview)
+  - Windows Insider Preview (Preview; flight ring)
+  - Windows App Installer (Preview)
 - [winget](https://docs.microsoft.com/en-us/windows/package-manager/winget/)
+- [PowerShell](https://aka.ms/wmf5download) 5 or later, [PowerShell Core](https://github.com/PowerShell/PowerShell) included
+- Runtime execution policy of either: `Unrestricted`, `RemoteSigned` or `Bypass`
+
 
 ## Installation
 
+Simply run the following command:
+
 ```powershell
-Set-ExecutionPolicy RemoteSigned -scope CurrentUser
-.\install.ps1
+Set-ExecutionPolicy RemoteSigned -scope CurrentUser; .\install.ps1
 ```
 
-> This command will be changing over to a remote installer, but wanted to get
-> it fully working first.
+> 🚨 While in active development, the installer is not configured to be a remote
+> download. This will eventually change, but until then you'll need to download
+> this project manually.
 
 ## TODO
 
