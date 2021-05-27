@@ -58,7 +58,7 @@ function Assert-Depdendencies() {
         $failures += "Package Manager tool winget - https://docs.microsoft.com/windows/package-manager/winget/"
     }
 
-    if (($failures | Measure-Object) -gt 0) {
+    if ($failures.Length -gt 0) {
         Write-Host "Installation failed! Required dependencies missing!" -ForegroundColor DarkRed
         Write-Host "dotfiles requires: [$($failedDependencies -join ", ")]"
         Exit-Installer
