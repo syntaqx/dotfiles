@@ -53,11 +53,6 @@ function Assert-Depdendencies() {
         $failures += "Set-ExecutionPolicy {$($allowedExecutionPolicy -join ", ")} -Scope CurrentUser"
     }
 
-    # Ensure winget is installed
-    if (-Not(Assert-Command -cmdname 'winget')) {
-        $failures += "winget package manager - https://docs.microsoft.com/windows/package-manager/winget/"
-    }
-
     if ($failures.Length -gt 0) {
         Write-Host "Installation failed! Required dependencies missing!" -ForegroundColor DarkRed
         Write-Host "dotfiles requires: [$($failures -join ", ")]"
@@ -123,12 +118,18 @@ try {
     Write-Host "Installing applications [winget]..." -ForegroundColor Green
     Write-Host "------------------------------------" -ForegroundColor Green
 
-    (
-        "Microsoft.PowerToys",
-        "Microsoft.WindowsTerminal",
-        "Amazon.AWSCLI"
-    ) | ForEach-Object {
-        winget install -e --id $_
+    if (Assert-Command -cmdname 'winget') {
+        $failures += "winget package manager - https://docs.microsoft.com/windows/package-manager/winget/"
+
+        (
+            "Microsoft.PowerToys",
+            "Microsoft.WindowsTerminal",
+            "Amazon.AWSCLI"
+        ) | ForEach-Object {
+            winget install -e --id $_
+        }
+    } else {
+        Write-Host 'winget not installed, skipping...' -ForegroundColor DarkRed
     }
 
     # ------------------------------------------------------------------------------
