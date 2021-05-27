@@ -148,10 +148,12 @@ try {
     Write-Host "------------------------------------" -ForegroundColor Green
 
     scoop bucket add extras
+    scoop bucket add nerd-fonts
 
     scoop install sudo coreutils cacert 7zip curl wget
-    scoop install pandoc gh act terraform
+    scoop install shellcheck
 
+    scoop install pandoc gh act terraform
     scoop install extras/vcredist2019
     scoop install php composer
 

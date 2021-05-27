@@ -7,14 +7,13 @@
     "ms-vscode-remote.vscode-remote-extensionpack",
     "msjsdiag.debugger-for-chrome",
     "eamodio.gitlens",
-    //
     "ms-azuretools.vscode-docker",
     "golang.go",
     "ms-vscode.powershell",
-    //
     "esbenp.prettier-vscode",
     "felixfbecker.php-intellisense",
     "felixfbecker.php-debug",
-    "kokororin.vscode-phpfmt"
+    "kokororin.vscode-phpfmt",
+    "timonwong.shellcheck"
   ]
 }
