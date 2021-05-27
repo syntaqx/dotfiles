@@ -60,7 +60,7 @@ function Assert-Depdendencies() {
 
     if ($failures.Length -gt 0) {
         Write-Host "Installation failed! Required dependencies missing!" -ForegroundColor DarkRed
-        Write-Host "dotfiles requires: [$($failedDependencies -join ", ")]"
+        Write-Host "dotfiles requires: [$($failures -join ", ")]"
         Exit-Installer
     }
 }
