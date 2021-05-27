@@ -55,7 +55,7 @@ function Assert-Depdendencies() {
 
     # Ensure winget is installed
     if (-Not(Assert-Command -cmdname 'winget')) {
-        $failures += "Package Manager tool winget - https://docs.microsoft.com/windows/package-manager/winget/"
+        $failures += "winget package manager - https://docs.microsoft.com/windows/package-manager/winget/"
     }
 
     if ($failures.Length -gt 0) {
