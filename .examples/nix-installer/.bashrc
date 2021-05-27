@@ -1,4 +1,4 @@
-#!/usr/env/bin bash
+#!/usr/bin/env bash
 
 # Configure Vagrant for WSL
 export PATH="$PATH:/mnt/c/Program Files/Oracle/VirtualBox"
