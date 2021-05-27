@@ -19,5 +19,5 @@ export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 # Terminal colours set in DIR_COLORS
 eval "$(dircolors -b /etc/DIR_COLORS)"
 
-# shellcheck source=.aliases
+# shellcheck disable=SC1091
 [[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases"
