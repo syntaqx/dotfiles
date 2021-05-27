@@ -1,0 +1,16 @@
+Locale=en_US
+Charset=UTF-8
+
+Rows=26
+Columns=88
+
+Term=xterm-256color
+
+Window=max
+Transparency=off
+FontSmoothing=full
+
+Font=Source Code Pro
+FontHeight=10
+
+ConfirmExit=no
