@@ -119,8 +119,6 @@ try {
     Write-Host "------------------------------------" -ForegroundColor Green
 
     if (Assert-Command -cmdname 'winget') {
-        $failures += "winget package manager - https://docs.microsoft.com/windows/package-manager/winget/"
-
         (
             "Microsoft.PowerToys",
             "Microsoft.WindowsTerminal",
