@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC1091
 # ~/.bashrc: executed by bash(1) for non-login shells.
 
 # If not running interactively, don't do anything
 case $- in *i*) ;; *) return;; esac
 
-# Ensure LANG is provided
-export LANG=${LANG:-$(exec /usr/bin/locale -uU)}
+# Ensure LANG (and its variants) is set as expected
+export LANG="en_US.UTF-8"
 export LANGUAGE="$LANG"
 export LC_ALL="$LANG"
 export LC_CTYPE="$LANG"
@@ -17,7 +18,13 @@ export PATH="/c/Windows/System32/OpenSSH:$PATH"
 export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 
 # Terminal colours set in DIR_COLORS
-eval "$(dircolors -b /etc/DIR_COLORS)"
+# eval "$(dircolors -b /etc/DIR_COLORS)"
 
-# shellcheck disable=SC1091
-[[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases"
+if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
+  GIT_PROMPT_ONLY_IN_REPO=1
+  source "$HOME/.bash-git-prompt/gitprompt.sh"
+fi
+
+if [[ -f "$HOME/.aliases" ]]; then
+  source "$HOME/.aliases"
+fi
