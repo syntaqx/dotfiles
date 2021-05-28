@@ -39,9 +39,12 @@ more likely chance that I simply haven't tried to yet.
 - [ ] nVidia GeForce Experience
 - [ ] Logitech Capture
 - [ ] SteelSeries GG
+- [ ] CORSAIR iCUE 3
+  - `SYNTAQX-DEVBOX` cannot be upgraded to v4 as the H115i is not detected
 
 #### Productivity
 
+- [ ] CCleaner
 - [ ] 1Password
 - [ ] Adobe Creative Cloud
 - [ ] Chrome Remote Desktop
