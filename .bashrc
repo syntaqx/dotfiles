@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC1091
 # ~/.bashrc: executed by bash(1) for non-login shells.
+
+# shellcheck disable=SC1091
 
 # If not running interactively, don't do anything
 case $- in *i*) ;; *) return;; esac
@@ -19,11 +20,6 @@ export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 
 # Terminal colours set in DIR_COLORS
 # eval "$(dircolors -b /etc/DIR_COLORS)"
-
-if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
-  GIT_PROMPT_ONLY_IN_REPO=1
-  source "$HOME/.bash-git-prompt/gitprompt.sh"
-fi
 
 if [[ -f "$HOME/.aliases" ]]; then
   source "$HOME/.aliases"

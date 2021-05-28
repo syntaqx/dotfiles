@@ -8,6 +8,13 @@ PS1="$PS1"'\[\033[35m\]'    # change to purple
 PS1="$PS1"'\[\033[33m\]'    # change to brownish yellow
 PS1="$PS1"'\w'              # current working directory
 
+# Speed up git ps1 significantly
+fast_git_ps1 () {
+  printf -- "$(git branch 2>/dev/null | grep -e '\* ' | sed 's/^..\(.*\)/ \1} /')"
+}
+
+PS1="$PS1"'\[\033[33m\w$(fast_git_ps1)\033[0m\] $'
+
 # if test -z "$WINELOADERNOEXEC"; then
 #   GIT_EXEC_PATH="$(git --exec-path 2>/dev/null)"
 #   COMPLETION_PATH="${GIT_EXEC_PATH%/libexec/git-core}"
