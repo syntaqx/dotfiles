@@ -7,13 +7,12 @@ Personal dotfiles, period.
 
 ## Prerequisites
 
-- Windows 10 v1709 (10.0.16299) or later
-  - Windows Insider Preview (Preview; flight ring)
+- Windows 10 Home/Pro Build 21390 or later
+  - Windows Insider Preview (Dev Channel)
   - Windows App Installer (Preview)
 - [winget](https://docs.microsoft.com/en-us/windows/package-manager/winget/)
 - [PowerShell](https://aka.ms/wmf5download) 5 or later, [PowerShell Core](https://github.com/PowerShell/PowerShell) included
 - Runtime execution policy of either: `Unrestricted`, `RemoteSigned` or `Bypass`
-
 
 ## Installation
 

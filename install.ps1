@@ -121,7 +121,7 @@ try {
     if (Assert-Command -cmdname 'winget') {
         (
             "Microsoft.PowerToys",
-            "Microsoft.WindowsTerminal",
+            "Microsoft.WindowsTerminalPreview", # "Microsoft.WindowsTerminal",
             "Amazon.AWSCLI"
         ) | ForEach-Object {
             winget install -e --id $_
