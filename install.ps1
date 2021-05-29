@@ -122,7 +122,8 @@ try {
         (
             "Microsoft.PowerToys",
             "Microsoft.WindowsTerminalPreview", # "Microsoft.WindowsTerminal",
-            "Amazon.AWSCLI"
+            "Amazon.AWSCLI",
+            "Heroku.HerokuCLI"
         ) | ForEach-Object {
             winget install -e --id $_
         }

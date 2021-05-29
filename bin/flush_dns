@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+set -ex
+# I literally always forget how to flush my DNS settings
+
+dir="${BASH_SOURCE%/*}"
+ [[ -z "$dir" ]] && dir="$PWD"
+
+# shellheck source=uname_os
+. "$dir"/uname_os
+
+OS=$(uname_os)
+case "$OS" in
+  darwin) dscacheutil -flushcache
+    sudo killall -USR1 dnsmasq
+    ;;
+  linux)
+     sudo /etc/init.d/nscd restart \
+  || sudo /etc/init.d/dnsmasq restart \
+  || echo 'No DNS caching'
+  ;;
+  windows)
+    ipconfig //flushdns
+    ;;
+  freebsd)
+    su - root -c rndc restart
+    ;;
+  *) echo "$0: Unknown OS $OS"
+esac
