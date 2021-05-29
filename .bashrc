@@ -21,6 +21,9 @@ HISTFILESIZE=2000
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
+# Set the editor to VSCode
+export EDITOR='code'
+
 # Ensure LANG (and its variants) is set as expected
 export LANG="en_US.UTF-8"
 export LANGUAGE="$LANG"
@@ -42,7 +45,7 @@ esac
 # eval "$(dircolors -b /etc/DIR_COLORS)"
 
 if [[ -f "$HOME/.bash_aliases" ]]; then
-  source "$HOME/.bash_aliases"
+  . "$HOME/.bash_aliases"
 fi
 
 # enable programmable completion features (you don't need to enable
@@ -56,7 +59,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export GOPATH=$(go env GOPATH)
-export PATH="$GOPATH/bin:$PATH"
+GOPATH=$(go env GOPATH)
 
-export EDITOR='code'
+export GOPATH="$GOPATH"
+export PATH="$GOPATH/bin:$PATH"
