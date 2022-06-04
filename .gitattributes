@@ -3,6 +3,7 @@
 
 # Explicitly declare known line ending expectations
 *.go text eol=lf
+*.sh text eol=lf
 
 # Explicitly declare text files you want to always be normalized and converted
 # to native line endings on checkout.
