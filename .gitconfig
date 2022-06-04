@@ -2,18 +2,12 @@
 
   defaultBranch = main
 
-[credential]
-
-  helper = wincred
-
 [user]
 
   name = Chase Pierce
   email = syntaqx@gmail.com
 
 [core]
-
-  autocrlf = true
 
   # Use custom `.gitignore` and `.gitattributes`.
   excludesfile = ~/.gitignore
@@ -35,9 +29,6 @@
   # Speed up commands involving untracked files such as `git status`.
   # https://git-scm.com/docs/git-update-index#_untracked_cache
   untrackedCache = true
-
-  # Use Windows OpenSSH Client
-  sshcommand = C:/Windows/System32/OpenSSH/ssh.exe
 
 [color]
 
@@ -69,6 +60,10 @@
   # https://help.github.com/articles/signing-commits-using-gpg/
   # gpgsign = true
 
+[fetch]
+
+  prune = true
+
 [diff]
 
   # Detect copies as well as renames.
@@ -93,6 +88,7 @@
 
   # https://git-scm.com/docs/git-config#git-config-pushdefault
   default = simple
+
   # Make `git push` push relevant annotated tags when pushing branches out.
   followTags = true
 
